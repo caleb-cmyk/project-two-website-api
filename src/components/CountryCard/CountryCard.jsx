@@ -1,4 +1,4 @@
-const CountryCard = () => {
+const CountryCard = ( props ) => {
   return (
     <>
       <img
@@ -7,21 +7,22 @@ const CountryCard = () => {
         //replace with CSS style module
         style={{ maxWidth: "30%", height: "auto" }}
       />
-      <h1>Country Name</h1>
+      <h1>{props.countryInfo.countryName}</h1>
       <p>
-        Capital:<span>XXX</span>
+        Capital: <span>{props.countryInfo.capital}</span>
       </p>
       <p>
-        Population: <span>XX,XXX,XXX</span>
+        Population: <span>{props.countryInfo.population}</span>
       </p>
       <p>
-        Predominant Languages:<span>XXX</span>
+        Predominant Languages: <span>{props.countryInfo.officialLanguage}</span>
+        {/* Languages: iso 639-3 standard */}
       </p>
       <p>
-        Predominant Religions:<span>XXX</span>
+        Predominant Religion: <span>{props.countryInfo.primaryReligion}</span>
       </p>
       <div>
-        Predominant Ethnic Groups
+        Predominant Ethnic Groups 
         <ul>
           <li>Group 1: #XXX</li>
           <li>Group 2: #XXX</li>

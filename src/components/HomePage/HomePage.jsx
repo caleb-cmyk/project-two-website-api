@@ -2,7 +2,8 @@ const HomePage = () => {
   return (
     <>
       <h1>Home Page</h1>
-      <p>database description</p>
+      <p>site description</p>
+      <p>ethnic group random generator</p>
     </>
   );
 };

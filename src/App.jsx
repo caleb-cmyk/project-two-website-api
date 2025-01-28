@@ -13,25 +13,25 @@ import PeoplesCard from "./components/PeoplesCard/PeoplesCard";
 import UserList from "./components/UserList/UserList";
 
 function App() {
-  console.log(countryService());
 
-  const [countriesInfo, setCountriesInfo] = useState([]);
+  const [countryInfo, setCountryInfo] = useState([]);
+  const [countrySelected, setCountrySelected] = useState("Iran");
 
   useEffect (() => {
     const fetchCountriesInfo = async () => {
-      const data = await countryService();
-      console.log("fetched data", data);
+      const data = await countryService(countrySelected);
+      // console.log("fetched data", data[0].Ctry);
       const newCountriesInfo = {
-        countryName: data.Ctry,
-        capital: data.Capital,
-        population: data.Population,
-        officialLanguage: data.ROL3OfficialLanguage,
-        primaryReligion: data.ReligionPrimary,
+        countryName: data[0].Ctry,
+        capital: data[0].Capital,
+        population: data[0].Population,
+        officialLanguage: data[0].ROL3OfficialLanguage,
+        primaryReligion: data[0].ReligionPrimary,
       };
-      setCountriesInfo(newCountriesInfo);
+      setCountryInfo(newCountriesInfo);
     };
     fetchCountriesInfo();
-  }, []);
+  }, [countrySelected]);
 
   return (
     <>
@@ -39,7 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/countries" element={<CountryList />} />
-        <Route path="/countries/:countryId" element={<CountryCard />} />
+        <Route path="/countries/:countryId" element={<CountryCard countryInfo={countryInfo} />} />
         <Route path="/peoples" element={<PeoplesList />} />
         <Route path="/peoples/:peopleId" element={<PeoplesCard />} />
         <Route path="/userList" element={<UserList />} />
