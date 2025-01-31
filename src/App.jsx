@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Route, Routes } from "react-router";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
-import { Route, Routes } from "react-router";
 import countryService from "./services/countryService/countryService";
 import HomePage from "./components/HomePage/HomePage";
 import CountryList from "./components/CountryList/CountryList";

@@ -15,7 +15,7 @@ const CountryCard = ( props ) => {
         Population: <span>{props.countryInfo.population}</span>
       </p>
       <p>
-        Predominant Languages: <span>{props.countryInfo.officialLanguage}</span>
+        Official Language: <span>{props.countryInfo.officialLanguage}</span>
         {/* Languages: iso 639-3 standard */}
       </p>
       <p>
