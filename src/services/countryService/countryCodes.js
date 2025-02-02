@@ -17,7 +17,7 @@ const countryCodes = {
       // "Ashmore and Cartier Islands": "AT",
       "Austria": "AU",
       "Anguilla": "AV",
-      "Akrotiri": "AX",
+      // "Akrotiri": "AX",
       // "Antarctica": "AY",
       "Bahrain": "BA",
       "Barbados": "BB",
