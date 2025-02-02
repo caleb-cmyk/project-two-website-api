@@ -1,7 +1,9 @@
 import { useState } from "react";
 import countryCodes from "../../services/countryService/countryCodes";
+import { Navigate, useNavigate } from "react-router";
 
-const CountryList = () => {
+const CountryList = ( props ) => {
+  const navigate = useNavigate();
   const countryNamesList = [];
   const createCountryNamesList = () => {
     for (let i = 0; i < Object.keys(countryCodes).length; i++) {
@@ -13,13 +15,13 @@ const CountryList = () => {
 const [countrySelected, setCountrySelected] = useState("");
 
 const handleChange = (e) => {
-  console.log(e);
   setCountrySelected(e.target.value);
 };
 
 const handleClick = (e) => {
   e.preventDefault();
-  console.log(countrySelected);
+  props.chooseCountry(countrySelected);
+  navigate('/countries/countrySelected');
 };
 
   return (
@@ -31,13 +33,9 @@ const handleClick = (e) => {
         ))}
       </select>
       <button onClick={handleClick}>Find</button>
+      {/* countryCard below */}
     </>
   );
 };
 
 export default CountryList;
-
-          // const handleClick = (event) => {
-          //   event.preventDefault();
-          //   console.log(event.target.value);
-          // };
