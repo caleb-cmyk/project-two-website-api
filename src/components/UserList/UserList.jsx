@@ -1,12 +1,17 @@
 import { Link } from "react-router";
+import { Navigate , useNavigate } from "react-router";
 
 const UserList = (props) => {
+  const navigate = useNavigate();
+  const handleRemoveFromList = (country) => {
+    props.removeCountryFromUserList(country);
+  };
 
-    // const handleClick = (country) => {
-    //   console.log(props.userList);
-    //   const indexToRemove = props.userList.indexOf(country);
-    //   props.userList.splice(indexToRemove, 1);
-    // };
+  const handleInfo = (country) => {
+    console.log("clicked!");
+    props.chooseCountry(country.country);
+    navigate("/countries/666");
+  };
 
   return (
     <>
@@ -14,11 +19,13 @@ const UserList = (props) => {
       <ul>
         {props.userList.map((country) => (
           <>
-            <li>{country}</li>
-            {/* <Link to="/countries/:id" key={country}>
-              <button>Details</button>
-            </Link> */}
-            {/* <button onClick={handleClick(country)}>Remove</button> */}
+            <li key={country}>
+              {country}
+              <button onClick={() => handleInfo({ country })}>Details</button>
+              <button onClick={() => handleRemoveFromList(country)}>
+                Remove
+              </button>
+            </li>
           </>
         ))}
       </ul>
@@ -27,3 +34,8 @@ const UserList = (props) => {
 };
 
 export default UserList;
+
+// const indexOfCountry = props.userList.indexOf(country);
+// const removeCountryFromList = props.userList.splice(indexOfCountry,1);
+// removeCountryFromList;
+// setUserList(props.userList);

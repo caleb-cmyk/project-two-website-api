@@ -3,6 +3,7 @@ import { Route, Routes, useParams } from "react-router";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import countryService from "./services/countryService/countryService";
+import peopleService from "./services/PeopleService/peopleService";
 import HomePage from "./components/HomePage/HomePage";
 import CountryList from "./components/CountryList/CountryList";
 import CountryCard from "./components/CountryCard/CountryCard";
@@ -14,12 +15,23 @@ function App() {
   
   const [countryInfo, setCountryInfo] = useState([]);
   const [countrySelected, setCountrySelected] = useState("Iran");
+  // const [peopleInfo, setPeopleInfo] = useState([]);
+  // const [peopleSelected, setPeopleSelected] = useState("");
   const [userList, setUserList] = useState([]);
-
+  
   const addCountryToUserList = (country) => {
     if (!userList.includes(country)){
     setUserList((list) => [...list, country]);
     console.log(userList);
+    }
+  };
+
+  const removeCountryFromUserList = (country) => {
+    if (userList.includes(country)) {
+      const indexOfCountry = userList.indexOf(country);
+      const newUserList = [...userList];
+      newUserList.splice(indexOfCountry, 1);
+      setUserList(newUserList);
     }
   };
   
@@ -42,6 +54,18 @@ function App() {
     fetchCountriesInfo();
   }, [countrySelected]);
 
+
+  // useEffect (() => {
+  //   const fetchPeopleInfo = async () => {
+  //     const data = await peopleService(peopleSelected);
+  //     const newPeopleInfo = {
+  //       data
+  //     };
+  //     setPeopleInfo(newPeopleInfo);
+  //   };
+  //   fetchPeopleInfo();
+  // }, [peopleSelected]);
+
   return (
     <>
       <NavBar />
@@ -51,7 +75,7 @@ function App() {
         <Route path="/countries/:countryId" element={<CountryCard countryInfo={countryInfo} userList={userList} addCountryToUserList={addCountryToUserList} />} />
         <Route path="/peoples" element={<PeoplesList />} />
         <Route path="/peoples/:peopleId" element={<PeoplesCard />} />
-        <Route path="/userList" element={<UserList userList={userList} />} />
+        <Route path="/userList" element={<UserList chooseCountry={chooseCountry} userList={userList} removeCountryFromUserList={removeCountryFromUserList} />} />
         <Route path="*" element="Whoops, there's nothing here at the moment!" />
       </Routes>
     </>

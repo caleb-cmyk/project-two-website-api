@@ -10,9 +10,9 @@ const NavBar = () => {
         <li>
           <Link to="/countries">Countries</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/peoples">Peoples</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/userList">Your List</Link>
         </li>
