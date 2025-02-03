@@ -54,18 +54,15 @@ function App() {
     fetchCountriesInfo();
   }, [countrySelected]);
 
-useEffect(() => {
-  const fetchUserList = async () => {
-    const data = await listService(userListAirtable);
-    const userListData = data.records.map(record => {
-      return {
-        country: record.fields.Country
-      };
-    });
-    setUserListAirtable(userListData);
-  };
-  fetchUserList();
-}, []);
+  useEffect(() => {
+    const fetchUserList = async () => {
+      const data = await listService(userListAirtable);
+      const userListData = data.records.map(record => record.fields.Country);
+      setUserList(userListData);
+    };
+    fetchUserList();
+  }, []);
+  
 
 
   return (

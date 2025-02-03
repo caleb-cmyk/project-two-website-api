@@ -21,31 +21,32 @@ async function listService() {
   }
 }
 
-export default listService;
+async function updateListService() {
+  const url = "https://api.airtable.com/v0/app1q6k7CMeyOgiyH/Table%201";
+  const API_KEY = "pat1waroe30XKt5sz.3b7ef6becaa2eef010da55a2337c84270c2fdc623ec125af2182c4f5fa89d758"
+  const data = {
+    fields: {
+      country: "Simon",
+    },
+  };
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
 
+    const json = await response.json();
+    console.log(json);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
 
-
-
-// import { useState } from "react";
-// import countryCodes from "./countryCodes";
-
-// const API_KEY = "7d19b3b9e2fb";
-// const BASE_URL = "https://api.joshuaproject.net/v1/countries/";
-
-// const countryService = async (countrySelected) => {
-//     const url = `${BASE_URL}${countryCodes[countrySelected]}.json?api_key=${API_KEY}`;
-//     try {
-//       const response = await fetch(url);
-//       if (!response.ok) {
-//         throw new Error(`Response status: ${response.status}`);
-//       }
-//       const json = await response.json();
-//       return json;
-//     //   console.log(json);
-//     } catch (error) {
-//     //   console.error(error.message);
-//     return undefined;
-//     };
-//   };
-
-//   export default countryService;
+export default  listService ;
