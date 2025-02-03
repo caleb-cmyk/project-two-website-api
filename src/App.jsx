@@ -14,18 +14,17 @@ function App() {
   
   const [countryInfo, setCountryInfo] = useState([]);
   const [countrySelected, setCountrySelected] = useState("Iran");
-  // const [userList, setUserList] = useState(["country1", "country2"]);
   const [userList, setUserList] = useState([]);
 
   const addCountryToUserList = (country) => {
+    if (!userList.includes(country)){
     setUserList((list) => [...list, country]);
-    // add code to check for repeat countries on list
     console.log(userList);
+    }
   };
   
   const chooseCountry = (country) => {
     setCountrySelected(country);
-    console.log(countrySelected);
   };
   
   useEffect (() => {
@@ -48,8 +47,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/countries" element={<CountryList chooseCountry={chooseCountry} countryInfo={countryInfo}/>} />
-        <Route path="/countries/:countryId" element={<CountryCard countryInfo={countryInfo} addCountryToUserList={addCountryToUserList} userList={userList} />} />
+        <Route path="/countries" element={<CountryList chooseCountry={chooseCountry} countryInfo={countryInfo} addCountryToUserList={addCountryToUserList} />} />
+        <Route path="/countries/:countryId" element={<CountryCard countryInfo={countryInfo} userList={userList} addCountryToUserList={addCountryToUserList} />} />
         <Route path="/peoples" element={<PeoplesList />} />
         <Route path="/peoples/:peopleId" element={<PeoplesCard />} />
         <Route path="/userList" element={<UserList userList={userList} />} />

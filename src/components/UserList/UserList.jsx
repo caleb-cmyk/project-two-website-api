@@ -1,11 +1,12 @@
-const UserList = (props) => {
-  console.log(props.userList[0]);
+import { Link } from "react-router";
 
-//   const handleClick = (country) => {
-//     console.log(props.userList);
-//     const indexToRemove = props.userList.indexOf(country);
-//     props.userList.splice(indexToRemove, 1);
-//   };
+const UserList = (props) => {
+
+    // const handleClick = (country) => {
+    //   console.log(props.userList);
+    //   const indexToRemove = props.userList.indexOf(country);
+    //   props.userList.splice(indexToRemove, 1);
+    // };
 
   return (
     <>
@@ -13,7 +14,10 @@ const UserList = (props) => {
       <ul>
         {props.userList.map((country) => (
           <>
-            <li key={country}>{country}</li>
+            <li>{country}</li>
+            {/* <Link to="/countries/:id" key={country}>
+              <button>Details</button>
+            </Link> */}
             {/* <button onClick={handleClick(country)}>Remove</button> */}
           </>
         ))}

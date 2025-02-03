@@ -1,8 +1,9 @@
 import { useState } from "react";
 import countryCodes from "../../services/countryService/countryCodes";
 import { Navigate, useNavigate } from "react-router";
+import { Link } from "react-router";
 
-const CountryList = ( props ) => {
+const CountryList = (props) => {
   const navigate = useNavigate();
   const countryNamesList = [];
   const createCountryNamesList = () => {
@@ -12,28 +13,27 @@ const CountryList = ( props ) => {
   };
   createCountryNamesList();
 
-const [countrySelected, setCountrySelected] = useState("");
+  const handleAddToList = (country) => {
+      props.addCountryToUserList(country.country);
+  };
 
-const handleChange = (e) => {
-  setCountrySelected(e.target.value);
-};
-
-const handleClick = (e) => {
-  e.preventDefault();
-  props.chooseCountry(countrySelected);
-  navigate('/countries/countrySelected');
-};
+  const handleInfo = (country) => {
+    console.log("clicked!");
+    props.chooseCountry(country.country);
+    navigate("/countries/666");
+  };
 
   return (
     <>
-      <select onChange={handleChange}>
-        <option key="select">Select Country</option>
+      <h1>Countries and Territories</h1>
+      <ul>
         {countryNamesList.map((country) => (
-          <option key={country} value={country} onChange={handleChange}>{country}</option>
+          <li key={country}>{country}
+            <button onClick={()=>handleInfo({country})}>Details</button>
+            <button onClick={()=>handleAddToList({country})}>Add to List</button>
+          </li>
         ))}
-      </select>
-      <button onClick={handleClick}>Find</button>
-      {/* countryCard below */}
+      </ul>
     </>
   );
 };

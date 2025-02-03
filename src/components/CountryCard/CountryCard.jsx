@@ -2,21 +2,14 @@ import { useState } from "react";
 
 const CountryCard = (props) => {
 
-  const handleClick = () => {
-    if (!props.userList.includes(props.countryInfo.countryName)) {
+  const handleAddToList = () => {
     props.addCountryToUserList(props.countryInfo.countryName);
-    } 
-  };
-
-
-  //   const handleClick = () => {
-  //   props.addCountryToUserList(props.countryInfo.countryName);
-  // };
+};
 
   return (
     <>
       <h1>{props.countryInfo.countryName}</h1>
-      <button onClick={handleClick}>Add to List</button>
+      <button onClick={handleAddToList}>Add to List</button>
       <p>
         Capital: <span>{props.countryInfo.capital}</span>
       </p>

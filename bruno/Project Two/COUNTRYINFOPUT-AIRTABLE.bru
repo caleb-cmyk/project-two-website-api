@@ -1,0 +1,25 @@
+meta {
+  name: COUNTRYINFOPUT-AIRTABLE
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://api.airtable.com/v0/app1q6k7CMeyOgiyH/Table%201
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer pat1waroe30XKt5sz.3b7ef6becaa2eef010da55a2337c84270c2fdc623ec125af2182c4f5fa89d758
+}
+
+body:json {
+  {
+    "fields": {
+      "Country": "Azerbaijan"
+      "Country2": "Germany"
+      "Country3": "Australia"
+    }
+  }
+}
