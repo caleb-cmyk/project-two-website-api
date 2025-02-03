@@ -4,6 +4,7 @@ import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import countryService from "./services/countryService/countryService";
 import peopleService from "./services/PeopleService/peopleService";
+import listService from "./services/ListService/ListService";
 import HomePage from "./components/HomePage/HomePage";
 import CountryList from "./components/CountryList/CountryList";
 import CountryCard from "./components/CountryCard/CountryCard";
@@ -15,9 +16,8 @@ function App() {
   
   const [countryInfo, setCountryInfo] = useState([]);
   const [countrySelected, setCountrySelected] = useState("Iran");
-  // const [peopleInfo, setPeopleInfo] = useState([]);
-  // const [peopleSelected, setPeopleSelected] = useState("");
   const [userList, setUserList] = useState([]);
+  const [userListAirtable, setUserListAirtable] = useState([]);
   
   const addCountryToUserList = (country) => {
     if (!userList.includes(country)){
@@ -54,17 +54,19 @@ function App() {
     fetchCountriesInfo();
   }, [countrySelected]);
 
+useEffect(() => {
+  const fetchUserList = async () => {
+    const data = await listService(userListAirtable);
+    const userListData = data.records.map(record => {
+      return {
+        country: record.fields.Country
+      };
+    });
+    setUserListAirtable(userListData);
+  };
+  fetchUserList();
+}, []);
 
-  // useEffect (() => {
-  //   const fetchPeopleInfo = async () => {
-  //     const data = await peopleService(peopleSelected);
-  //     const newPeopleInfo = {
-  //       data
-  //     };
-  //     setPeopleInfo(newPeopleInfo);
-  //   };
-  //   fetchPeopleInfo();
-  // }, [peopleSelected]);
 
   return (
     <>
