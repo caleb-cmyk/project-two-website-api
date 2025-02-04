@@ -63,24 +63,25 @@ const CountryList = (props) => {
     navigate("/countries/666");
   };
 
-  const testArray = ["test array item"];
-
   return (
     <>
       <h1>Countries and Territories</h1>
-      <h2>A</h2>
-      <ul>
-        {sortByStartingAlphabet("A").map((country) => (
-          <li>{country}</li>
-        ))}
-
-        {/* {countryNamesList.map((country) => (
-          <li key={country}>{country}
-            <button onClick={()=>handleInfo({country})}>Details</button>
-            <button onClick={()=>handleAddToList({country})}>Add to List</button>
-          </li>
-        ))} */}
-      </ul>
+      {alphabetArray.map((alphabet) => (
+        <>
+          <h2>{alphabet}</h2>
+          <ul>
+            {sortByStartingAlphabet(alphabet).map((country) => (
+              <li key={country}>
+                {country}
+                <button onClick={() => handleInfo({ country })}>Details</button>
+                <button onClick={() => handleAddToList({ country })}>
+                  Add to List
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      ))}
     </>
   );
 };
