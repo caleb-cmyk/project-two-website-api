@@ -1,10 +1,14 @@
 // import { useState } from "react";
 import countryCodes from "../../services/countryService/countryCodes";
 import { Navigate, useNavigate } from "react-router";
+import CountryCardDirect from "../CountryCard/CountryCardDirect";
+import { Route , Routes } from "react-router";
 // import { Link } from "react-router";
 
 const CountryList = (props) => {
   const navigate = useNavigate();
+
+  //returns array of countries as their full name (transcribed from two letter country code)
   const countryNamesList = [];
   const createCountryNamesList = () => {
     for (let i = 0; i < Object.keys(countryCodes).length; i++) {
@@ -13,6 +17,7 @@ const CountryList = (props) => {
   };
   createCountryNamesList();
 
+  //returns array of countries starting with input alphabet
   const alphabetArray = [
     "A",
     "B",
@@ -41,8 +46,6 @@ const CountryList = (props) => {
     "Y",
     "Z",
   ];
-
-  //returns array of countries starting with input alphabet
   const sortByStartingAlphabet = (alphabet) => {
     let countriesSorted = [];
     for (let i = 0; i < countryNamesList.length; i++) {
@@ -53,15 +56,25 @@ const CountryList = (props) => {
     return countriesSorted;
   };
 
+  //handlers
   const handleAddToList = (country) => {
     props.addCountryToUserList(country.country);
   };
 
   const handleInfo = (country) => {
-    console.log("clicked!");
     props.chooseCountry(country.country);
     navigate("/countries/666");
   };
+
+  // Test 1 start
+
+  const handleInfoTest = (country) => {
+    navigate("/countryTest", { state: { country: country } });
+  };
+  
+    // console.log(country.country)
+
+  // Test 1 end
 
   return (
     <>
@@ -74,9 +87,8 @@ const CountryList = (props) => {
               <li key={country}>
                 {country}
                 <button onClick={() => handleInfo({ country })}>Details</button>
-                <button onClick={() => handleAddToList({ country })}>
-                  Add to List
-                </button>
+                <button onClick={() => handleAddToList({ country })}>Add to List</button>
+                <button onClick={() => handleInfoTest({ country })}>Details Test</button>
               </li>
             ))}
           </ul>
