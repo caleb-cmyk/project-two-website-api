@@ -46,8 +46,7 @@ const CountryCard = () => {
   }, [countryCode]);
 
 const handleViewEthnic = ( ethnic ) => {
-  navigate(`/peoples/${ethnic.peopleName}`);
-    // navigate(`/countries/${country.country}`);
+  navigate(`/peoples/${ethnic.ethnic.peopleIndex}`);
   };
 
 
@@ -73,7 +72,7 @@ const handleViewEthnic = ( ethnic ) => {
         <ul>
          {ethnicsInfo.map((ethnic) => (
           <>
-          <li key={ethnic.PeopleID3ROG3}>{ethnic.peopleName}
+          <li key={ethnic.PeopleIndex}>{ethnic.peopleName}
           <button onClick={() => handleViewEthnic({ethnic})}>View</button>
           </li>
 
