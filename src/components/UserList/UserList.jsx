@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+// import { Link } from "react-router";
 import { Navigate , useNavigate } from "react-router";
 
 const UserList = (props) => {
@@ -9,8 +9,7 @@ const UserList = (props) => {
 
   const handleInfo = (country) => {
     console.log("clicked!");
-    props.chooseCountry(country.country);
-    navigate("/countries/666");
+    navigate(`/countries/${country.country}`);
   };
 
   return (
@@ -34,8 +33,3 @@ const UserList = (props) => {
 };
 
 export default UserList;
-
-// const indexOfCountry = props.userList.indexOf(country);
-// const removeCountryFromList = props.userList.splice(indexOfCountry,1);
-// removeCountryFromList;
-// setUserList(props.userList);

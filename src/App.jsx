@@ -11,7 +11,7 @@ import CountryCard from "./components/CountryCard/CountryCard";
 import PeoplesList from "./components/PeoplesList/PeoplesList";
 import PeoplesCard from "./components/PeoplesCard/PeoplesCard";
 import UserList from "./components/UserList/UserList";
-import CountryCardDirect from "./components/CountryCard/CountryCardDirect";
+import CountryCardDirect from "./components/CountryCard/CountryCard";
 
 function App() {
   
@@ -73,12 +73,11 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/countries" element={<CountryList chooseCountry={chooseCountry} countryInfo={countryInfo} addCountryToUserList={addCountryToUserList} />} />
-        <Route path="/countries/:countryId" element={<CountryCard setCountryInfo={setCountryInfo} countryInfo={countryInfo} userList={userList} addCountryToUserList={addCountryToUserList} />} />
+        <Route path="/countries/:countryId" element={<CountryCard />} />
         <Route path="/peoples" element={<PeoplesList />} />
         <Route path="/peoples/:peopleId" element={<PeoplesCard />} />
         <Route path="/userList" element={<UserList chooseCountry={chooseCountry} userList={userList} removeCountryFromUserList={removeCountryFromUserList} />} />
         <Route path="*" element="Whoops, there's nothing here at the moment!" />
-        <Route path="/countryTest" element={<CountryCardDirect />} />
       </Routes>
     </>
   );

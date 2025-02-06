@@ -1,7 +1,6 @@
 // import { useState } from "react";
 import countryCodes from "../../services/countryService/countryCodes";
 import { Navigate, useNavigate } from "react-router";
-import CountryCardDirect from "../CountryCard/CountryCardDirect";
 import { Route , Routes } from "react-router";
 // import { Link } from "react-router";
 
@@ -62,19 +61,8 @@ const CountryList = (props) => {
   };
 
   const handleInfo = (country) => {
-    props.chooseCountry(country.country);
-    navigate("/countries/666");
+    navigate(`/countries/${country.country}`);
   };
-
-  // Test 1 start
-
-  const handleInfoTest = (country) => {
-    navigate("/countryTest", { state: { country: country } });
-  };
-  
-    // console.log(country.country)
-
-  // Test 1 end
 
   return (
     <>
@@ -88,7 +76,6 @@ const CountryList = (props) => {
                 {country}
                 <button onClick={() => handleInfo({ country })}>Details</button>
                 <button onClick={() => handleAddToList({ country })}>Add to List</button>
-                <button onClick={() => handleInfoTest({ country })}>Details Test</button>
               </li>
             ))}
           </ul>

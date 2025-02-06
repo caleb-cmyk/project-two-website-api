@@ -1,28 +1,44 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useParams } from "react-router";
+import countryService from "../../services/countryService/countryService";
+import { useState , useEffect } from "react";
 
-const CountryCard = (props) => {
+const CountryCard = () => {
+ const countrySelected = useParams().countryId;
+ console.log(countrySelected);
 
-  const handleAddToList = () => {
-    props.addCountryToUserList(props.countryInfo.countryName);
-};
+  const [countryInfo, setCountryInfo] = useState([]);
+
+  useEffect(() => {
+    const fetchCountryInfo = async () => {
+      const data = await countryService(countrySelected);
+      const cleanCountryData = {
+        countryName: data[0].Ctry,
+        capital: data[0].Capital,
+        population: data[0].Population,
+        officialLanguage: data[0].ROL3OfficialLanguage,
+        primaryReligion: data[0].ReligionPrimary,
+      };
+      setCountryInfo(cleanCountryData);
+    };
+    fetchCountryInfo();
+  }, [countrySelected]);
 
   return (
     <>
-      <h1>{props.countryInfo.countryName}</h1>
-      <button onClick={handleAddToList}>Add to List</button>
+      <h1>{countryInfo.countryName}</h1>
+      <button>Add to List</button>
       <p>
-        Capital: <span>{props.countryInfo.capital}</span>
+        Capital: <span>{countryInfo.capital}</span>
       </p>
       <p>
-        Population: <span>{props.countryInfo.population}</span>
+        Population: <span>{countryInfo.population}</span>
       </p>
       <p>
-        Official Language: <span>{props.countryInfo.officialLanguage}</span>
+        Official Language: <span>{countryInfo.officialLanguage}</span>
         {/* Languages: iso 639-3 standard */}
       </p>
       <p>
-        Predominant Religion: <span>{props.countryInfo.primaryReligion}</span>
+        Predominant Religion: <span>{countryInfo.primaryReligion}</span>
       </p>
       <div>
         Predominant Ethnic Groups
