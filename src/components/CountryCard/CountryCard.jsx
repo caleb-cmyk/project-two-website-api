@@ -1,12 +1,17 @@
 import { useParams } from "react-router";
 import countryService from "../../services/countryService/countryService";
+import peopleService from "../../services/PeopleService/peopleService";
+import countryCodes from "../../services/countryService/countryCodes";
 import { useState , useEffect } from "react";
+import { Navigate , useNavigate } from "react-router";
 
 const CountryCard = () => {
+  const navigate = useNavigate();
  const countrySelected = useParams().countryId;
- console.log(countrySelected);
+//  console.log(countrySelected);
 
   const [countryInfo, setCountryInfo] = useState([]);
+  const [ethnicsInfo, setEthnicsInfo] = useState([]);
 
   useEffect(() => {
     const fetchCountryInfo = async () => {
@@ -22,6 +27,29 @@ const CountryCard = () => {
     };
     fetchCountryInfo();
   }, [countrySelected]);
+
+  const countryCode = countryCodes[countrySelected];
+  useEffect(() => {
+    const fetchEthnicsInfo = async () => {
+      const data = await peopleService(countryCode);
+      console.log(data)
+      const cleanEthnicsDataArray = [];
+      for (let i = 0; i < data.length; i++) {
+        cleanEthnicsDataArray.push({
+          peopleName: data[i].PeopNameInCountry,
+          peopleIndex: data[i].PeopleID3ROG3,
+        });
+      }
+        setEthnicsInfo(cleanEthnicsDataArray);
+      };
+    fetchEthnicsInfo();
+  }, [countryCode]);
+
+const handleViewEthnic = ( ethnic ) => {
+  navigate(`/peoples/${ethnic.peopleName}`);
+    // navigate(`/countries/${country.country}`);
+  };
+
 
   return (
     <>
@@ -41,11 +69,16 @@ const CountryCard = () => {
         Predominant Religion: <span>{countryInfo.primaryReligion}</span>
       </p>
       <div>
-        Predominant Ethnic Groups
+        Predominant Ethnic Groups {ethnicsInfo.peopleName}
         <ul>
-          <li>Group 1: #XXX</li>
-          <li>Group 2: #XXX</li>
-          <li>Group 3: #XXX</li>
+         {ethnicsInfo.map((ethnic) => (
+          <>
+          <li key={ethnic.PeopleID3ROG3}>{ethnic.peopleName}
+          <button onClick={() => handleViewEthnic({ethnic})}>View</button>
+          </li>
+
+          </>
+          ))}
         </ul>
       </div>
     </>
